@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Creed</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 50px auto;
+      padding: 20px;
+    }
 
+    button {
+      display: block;
+      margin-top: 20px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Personal Creed</h1>
+
+  <div id="creed" contenteditable="false">
+    "I want to go on the adventure of my life.<br>
+    Saying exactly what I think, relentlessly pursuing truth, pushing myself to the absolute limits of what I can do with the time I have.<br><br>
+
+    I choose to become as powerful, competent, and useful as possible.<br>
+    To voluntarily carry the heaviest burden I can bear, leaving nothing behind.<br><br>
+
+    When the clock hits zero, the tank will be empty.<br>
+    I'll have used every unfair advantage, smiled in the face of unfairness without bitterness, and focused ruthlessly on giving everything I possibly could, by choice."
+  </div>
+
+  <button onclick="toggleEdit()">Edit Creed</button>
+
+  <script>
+    const creed = document.getElementById('creed');
+    const button = document.querySelector('button');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if(localStorage.getItem('creedContent')) {
+        creed.innerHTML = localStorage.getItem('creedContent');
+      }
+    });
+
+    function toggleEdit() {
+      const isEditable = creed.contentEditable === "true";
+
+      if(isEditable) {
+        creed.contentEditable = "false";
+        button.textContent = 'Edit Creed';
+        localStorage.setItem('creedContent', creed.innerHTML);
+      } else {
+        creed.contentEditable = "true";
+        creed.focus();
+        button.textContent = 'Save Creed';
+      }
+    }
+  </script>
+
+</body>
+</html>
